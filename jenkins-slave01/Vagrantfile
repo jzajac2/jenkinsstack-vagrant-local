@@ -1,0 +1,22 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.box_check_update = false
+  config.vm.network "private_network", ip: "192.168.33.20"
+  config.vm.define "jenkins-slave01"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "512"
+    vb.gui = false
+    vb.name = "jenkins-slave01"
+  end
+
+  #  config.vm.provision "ansible" do |ansible|
+  #    ansible.version = "2.9.6"
+  #    ansible.playbook = ""
+  #  end
+end
+# TODO: convert manual steps to shell provisioner:
+# mkdir ~/.ssh; cd ~/.ssh/ && ssh-keygen -t rsa -m PEM -C "Jenkins agent key" -f "jenkinsAgent_rsa"
+#cat jenkinsAgent_rsa.pub >> ~/.ssh/authorized_keys
+# chmod 700 ~/.ssh
+# chmod 600 ~/.ssh/authorized_keys ~/.ssh/jenkinsAgent_rsa

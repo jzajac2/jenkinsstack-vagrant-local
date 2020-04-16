@@ -1,0 +1,15 @@
+# sudo dpkg-reconfigure keyboard-configuration
+Vagrant.configure("2") do |config|
+  config.vm.box_check_update = false
+  config.vm.define "ubuntu-client-gui"
+  config.vm.box = "fasmat/ubuntu1804-desktop"
+  config.vm.provider "virtualbox" do |v|
+    v.gui = true
+    v.memory = 4096
+    v.name = "ubuntu-client-gui"
+  end
+
+  # In case you need an IP to access the VM from another software :
+  config.vm.network "private_network", ip: "192.168.33.30"
+
+end
